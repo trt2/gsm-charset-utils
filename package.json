@@ -1,0 +1,28 @@
+{
+  "name": "@trt2/gsm-charset-utils",
+  "version": "1.0.7",
+  "description": "Utility functions for SMS/GSM charset handling",
+  "main": "./lib/GsmCharacterUtils.js",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.20.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0",
+    "rimraf": "^2.5.4"
+  },
+  "scripts": {
+    "test": "mocha --require babel-core/register --reporter spec tests",
+    "clean": "rimraf lib/*",
+    "build": "babel src --out-dir lib",
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
+  },
+  "author": "anders",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
