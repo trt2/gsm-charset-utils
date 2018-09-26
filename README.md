@@ -4,7 +4,7 @@ Functions for counting SMS message parts and removing non-GSM alphabet character
 
 ## Usage
 
-Basic usage of the store:
+Basic usage of the functions:
 ```
 import * as GsmCharsetUtils from '@trt2/gsm-charset-utils';
 // This imports:
