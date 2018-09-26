@@ -4,6 +4,7 @@
   "description": "Utility functions for SMS/GSM charset handling",
   "main": "./lib/GsmCharacterUtils.js",
   "license": "MIT",
+  "repository": "github:trt2/gsm-charset-utils",
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.18.0",
