@@ -49,7 +49,7 @@ Returns an object:
 }
 ```
 
-The function will not split messages on an extended GSM character, the whole extended character is moved to the next segment.
+The function will not split messages on an extended GSM character or a UCS2 surrogate pair, the whole character is moved to the next segment.
 
 ## function isGsmChar( c )
 - c - Check if this character is part of either the GSM alphabet or the extended GSM alphabet.

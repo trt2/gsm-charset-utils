@@ -1,6 +1,6 @@
 {
   "name": "@trt2/gsm-charset-utils",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Utility functions for SMS/GSM charset handling",
   "main": "./lib/GsmCharacterUtils.js",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
-    "mocha": "^5.0.0",
+    "mocha": "^6.0.2",
     "rimraf": "^2.5.4"
   },
   "scripts": {
