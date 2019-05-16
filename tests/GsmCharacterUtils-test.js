@@ -60,7 +60,7 @@ describe("getCharCount test", function() {
         it(item.name, function() {
             let res = GsmCharacterUtils.getCharCount(item.text);
             expect(res).to.eql(item.expected);
-        })
+        });
     });
 });
 
@@ -70,41 +70,41 @@ describe("removeNonGsmChars test", function() {
             const text = 'test€ test æøå {}[] asd $';
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(text);
-        })
+        });
 
         it('Remove ucs2 char', function() {
             const text = 'test`asd';
             const expected = 'test\'asd';
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(expected);
-        })
+        });
 
         it('Replace quote chars', function() {
             const text = 'test «asd» “123” ‘single’ `back` lalalala ';
             const expected = 'test "asd" "123" \'single\' \'back\' lalalala ';
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(expected);
-        })
+        });
 
         it('Replace ellipsis char', function() {
             const text = 'test…';
             const expected = 'test...';
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(expected);
-        })
+        });
 
         it('Replace hyphen chars', function() {
             const text = 'test – asd — asd2';
             const expected = 'test - asd - asd2';
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(expected);
-        })
+        });
 
         it('Replace chars with ?', function() {
             const text = 'test © lala ™ asd 🙃 asd2 👨‍✈️';
             const expected = 'test ? lala ? asd ?? asd2 ?????';
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(expected);
-        })
+        });
     });
 });
