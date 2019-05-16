@@ -10,6 +10,7 @@ const UCS2_CHARS_SINGLE_SEGMENT =  Math.floor(SMS_BYTES / 2);
 
 const GSM_ALPHABET_EXTENDED =
     '\u000c\u005e\u007b\u007d\\\u005b\u007e\u005d\u007c\u20ac';
+const GSM_ALPHABET_EXTENDED_MAP = GSM_ALPHABET_EXTENDED.split('').reduce((ret, c) => (ret[c] = c, ret), {});
 
 const GSM_ALPHABET =
     '\u0040\u00A3\u0024\u00A5\u00E8\u00E9\u00F9\u00EC\u00F2\u00E7\n\u00D8\u00F8\r\u00C5\u00E5\u0394\u005F\u03A6\u0393\u039B\u03A9\u03A0\u03A8\u03A3\u0398\u039E\u00A0\u00C6\u00E6\u00DF' +
@@ -17,6 +18,7 @@ const GSM_ALPHABET =
     '\u003E\u003F\u00A1\u0041\u0042\u0043\u0044\u0045\u0046\u0047\u0048\u0049\u004A\u004B\u004C\u004D\u004E\u004F\u0050\u0051\u0052\u0053\u0054\u0055\u0056\u0057\u0058\u0059\u005A\u00C4\u00D6' +
     '\u00D1\u00DC\u00A7\u00BF\u0061\u0062\u0063\u0064\u0065\u0066\u0067\u0068\u0069\u006A\u006B\u006C\u006D\u006E\u006F\u0070\u0071\u0072\u0073\u0074\u0075\u0076\u0077\u0078\u0079\u007A\u00E4' +
     '\u00F6\u00F1\u00FC\u00E0';
+const GSM_ALPHABET_MAP = GSM_ALPHABET.split('').reduce((ret, c) => (ret[c] = c, ret), {});
 
 function isHighSurrogateCode(code) {
     return code >= 0xD800 && code <= 0xDBFF;
@@ -27,9 +29,9 @@ function isLowSurrogateCode(code) {
 }
 
 /**
- * The function below calculate the number of characters and segments are needed
+ * The function below calculate the number of characters and segments that are needed
  * for the given text. It takes into consideration the extended GSM characters that
- * requires an additional escape character, and surrogate pairs for UCS2 characters.
+ * require an additional escape character, and surrogate pairs for UCS2 characters.
  * An SMS text message consisting of multiple segments, may not have a segment that
  * ends with the escape character for GSM charaters, so the entire 2 character sequence
  * need to be moved to the next segment. The same applies for UCS2 surrogate pairs.
@@ -57,13 +59,13 @@ function getCharCountInfo(text) {
         charCount: 0,
         msgCount: 1,
         charsPerSegment: GSM_CHARS_PER_SEGMENT
-    }
+    };
 
     let ucs2CharCount = {
         charCount: 0,
         msgCount: 1,
         charsPerSegment: UCS2_CHARS_PER_SEGMENT
-    }
+    };
 
     let gsmPartCharRem = GSM_CHARS_PER_SEGMENT;
     let gsmTotCharCount = 0;
@@ -75,8 +77,8 @@ function getCharCountInfo(text) {
     const textLen = text.length;
     for (let i=0;i<textLen;i++) {
         const c = text[i];
-        const isGsmChar = GSM_ALPHABET.indexOf(c) !== -1;
-        const isExtGsmChar = GSM_ALPHABET_EXTENDED.indexOf(c) !== -1
+        const isGsmChar = !!GSM_ALPHABET_MAP[c];
+        const isExtGsmChar = !!GSM_ALPHABET_EXTENDED_MAP[c];
 
         // Default to normal character sizes
         let gsmCharSize = 1;
@@ -112,10 +114,10 @@ function getCharCountInfo(text) {
         if(gsmCharSize != 0) {
             gsmTotCharCount += gsmCharSize;
             
-            // If character does not fit inside current segment, add a new segment.
+            // If the character does not fit inside the current segment, add a new segment.
             // The charCount is initialized to the maximum number of characters for
-            // the number of segments, we do not return information about the number
-            // of unused "padding" characters we add to keep the extended characters
+            // the number of segments. We do not return information about the number
+            // of unused "padding" characters that are added to keep the extended characters
             // in the same segment.
             if(gsmPartCharRem < gsmCharSize) {
                 gsmCharCount.charCount = gsmCharCount.msgCount * GSM_CHARS_PER_SEGMENT;
@@ -130,10 +132,10 @@ function getCharCountInfo(text) {
         if(ucs2CharSize != 0) {
             ucs2TotCharCount += ucs2CharSize;
 
-            // If character does not fit inside current segment, add a new segment.
+            // If the character does not fit inside the current segment, add a new segment.
             // The charCount is initialized to the maximum number of characters for
-            // the number of segments, we do not return information about the number
-            // of unused "padding" characters we add to keep the surrogate pairs
+            // the number of segments. We do not return information about the number
+            // of unused "padding" characters that are added to keep the surrogate pairs
             // in the same segment.
             if(ucs2PartCharRem < ucs2CharSize) {
                 ucs2CharCount.charCount = ucs2CharCount.msgCount * UCS2_CHARS_PER_SEGMENT;
@@ -185,7 +187,7 @@ function getCharCount(text) {
 }
 
 function isGsmChar(c) {
-    return GSM_ALPHABET.indexOf(c) !== -1 || GSM_ALPHABET_EXTENDED.indexOf(c) !== -1;
+    return !!(GSM_ALPHABET_MAP[c] || GSM_ALPHABET_EXTENDED_MAP[c]);
 }
 
 /**
