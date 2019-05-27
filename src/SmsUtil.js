@@ -288,7 +288,7 @@ function splitStringToUtf16Segments(str, bytesPerSegment) {
         parts.push(curSegment);
     }
 
-    return createSplitResult('UCS2', parts, bytesPerSegment, bytesPerSegment/2);
+    return createSplitResult('UCS2', parts, bytesPerSegment, Math.floor(bytesPerSegment/2));
 }
 
 /**
@@ -302,7 +302,7 @@ function getSinglePartSegmentInfoUtf16(str) {
     curSegment.charCount = str.length;
     curSegment.byteCount = curSegment.charCount * 2;
 
-    return createSplitResult('UCS2', [curSegment], SMS_BYTES, SMS_BYTES/2);
+    return createSplitResult('UCS2', [curSegment], SMS_BYTES, Math.floor(SMS_BYTES/2));
 }
 
 /**
