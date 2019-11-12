@@ -185,13 +185,12 @@ function splitStringToGsmSegments(str, bytesPerSegment) {
     for(let strPos=0;strPos<strLen;strPos++) {
         const c = str[strPos];
         let charSize = 1;
-        if(isStdGsmChar(c)) {
-            // default 1
-        } else if(isExtGsmChar(c)) {
+        if(isExtGsmChar(c)) {
             charSize = 2;
         } else {
-            // This should not happen, but if it does, we replace all non-gsm characters with ?
-            curSegmentHasInvalidChar = true;
+            // This should not happen as the str should only contain valid gsm characters, 
+            // but if it does, we replace all non-gsm characters with ?
+            curSegmentHasInvalidChar = !isStdGsmChar(c);
         }        
 
         if(curPartRemCharCount < charSize) {
