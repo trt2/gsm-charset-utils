@@ -28,7 +28,7 @@ function getCharCount(text) {
  * - –—     (mapped to -)
  * - others will be mapped to ?
  */
-function removeNonGsmChars(msgText) {
+function removeNonGsmChars(msgText, replacementChar='?') {
     if(typeof msgText !== 'string' && !(msgText instanceof String)) {
         return '';
     }
@@ -40,7 +40,7 @@ function removeNonGsmChars(msgText) {
         .replace(/[\u2013\u2014]/g, "-")
         ;
 
-    return replaceNonGsmChars(msgText, '?');
+    return replaceNonGsmChars(msgText, replacementChar);
 }
 
 export {
