@@ -54,7 +54,8 @@ The function will not split messages on an extended GSM character or a UCS2 surr
 ## function isGsmChar( c )
 - c - Check if this character is part of either the GSM alphabet or the extended GSM alphabet.
 
-## function removeNonGsmChars(msgText)
+## function removeNonGsmChars(msgText, replacementChar='?')
 - msgText - Text from which non-GSM characters will be removed.
+- replacementChar - The character to replace non-GSM characters with
 
-Non-GSM characters will be replaced by '?', a very limited number of characters will be converted to similar characters in the GSM alphabet.
+Non-GSM characters will be replaced by `replacementChar`, a very limited number of characters will be converted to similar characters in the GSM alphabet.
