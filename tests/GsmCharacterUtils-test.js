@@ -106,5 +106,12 @@ describe("removeNonGsmChars test", function() {
             let res = GsmCharacterUtils.removeNonGsmChars(text);
             expect(res).to.equal(expected);
         });
+
+        it('Replace chars with *', function() {
+            const text = 'test © lala ™ asd 🙃 asd2 👨‍✈️';
+            const expected = 'test * lala * asd ** asd2 *****';
+            let res = GsmCharacterUtils.removeNonGsmChars(text, '*');
+            expect(res).to.equal(expected);
+        });        
     });
 });
