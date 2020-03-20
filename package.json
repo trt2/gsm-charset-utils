@@ -1,6 +1,6 @@
 {
   "name": "@trt2/gsm-charset-utils",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Utility functions for SMS/GSM charset handling",
   "main": "./lib/GsmCharacterUtils.js",
   "license": "MIT",
