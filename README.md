@@ -2,6 +2,9 @@
 
 Functions for counting SMS message parts and removing non-GSM alphabet characters.
 
+The SMS character counter on https://www.teletopiasms.no/p/utilities/sms-char-counter uses code from this package.
+This page uses functionality exported from the `SmsUtils.js` file, which is not the main export for the package.
+
 ## Usage
 
 Basic usage of the functions:
@@ -37,7 +40,7 @@ let gsmText = GsmCharsetUtils.removeNonGsmChars("«Hello world!»");
 
 
 ## function getCharCount(text)
-- text
+- `text`
 
 Returns an object:
 ```
@@ -52,10 +55,10 @@ Returns an object:
 The function will not split messages on an extended GSM character or a UCS2 surrogate pair, the whole character is moved to the next segment.
 
 ## function isGsmChar( c )
-- c - Check if this character is part of either the GSM alphabet or the extended GSM alphabet.
+- `c` - Check if this character is part of either the GSM alphabet or the extended GSM alphabet.
 
 ## function removeNonGsmChars(msgText, replacementChar='?')
-- msgText - Text from which non-GSM characters will be removed.
-- replacementChar - The character to replace non-GSM characters with
+- `msgText` - Text from which non-GSM characters will be removed.
+- `replacementChar` - The character to replace non-GSM characters with
 
 Non-GSM characters will be replaced by `replacementChar`, a very limited number of characters will be converted to similar characters in the GSM alphabet.
