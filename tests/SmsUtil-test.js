@@ -185,7 +185,19 @@ let getCharCountTests = [
             paddedCharCount: 308
         }
     },
-
+    { 'name': 'g013 - GSM alphabet chars',                  'text': "@£$¥èéùìòÇ\nØøÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà^{}\\[~]|€", 
+        'expected': {
+            segmentInfo: {
+                encoding: 'GSM',
+                parts: [
+                    {text: "@£$¥èéùìòÇ\nØøÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà^{}\\[~]|€", charCount: 144, byteCount: 126}
+                ],
+                bytesPerSegment: 140,
+                charsPerSegment: 160
+            },
+            paddedCharCount: 144
+        }
+    },
     { 'name': 'u001 - single ucs2 char',                    'text': '`',
         'expected': { 
             segmentInfo: {
