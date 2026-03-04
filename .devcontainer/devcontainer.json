@@ -1,0 +1,13 @@
+{
+    "name": "gsm-charset-utils-node",
+    "image": "node:24-bullseye",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint"
+            ]
+        }
+    },
+    "remoteUser": "node"
+}
